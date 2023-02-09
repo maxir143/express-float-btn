@@ -11,3 +11,12 @@
   min-width: 75px;
   min-height: 75px;
 }
+
+.ln-modal-window {
+  position: absolute;
+  bottom: 0;
+  right: 85px;
+  background-color: blueviolet;
+  min-width: 100px;
+  min-height: 100px;
+}

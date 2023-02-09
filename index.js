@@ -1,12 +1,14 @@
 import express from 'express'
-import { main } from './floatBtn.js'
+import path from 'path'
+import cors from 'cors'
 
 const app = express()
 const port = 3000
+app.use(express.static('public'))
+app.use(cors())
 
-app.get('/:id', (req, res) => {
-  const { id } = req
-  res.send(main(id))
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve('index.html'))
 })
 
 app.listen(port, () => {

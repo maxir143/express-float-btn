@@ -1,4 +1,5 @@
 const HIDABLE_CLASS = 'ln-container-hidable'
+const MODAL_CLASS = 'ln-modal-window'
 
 function floatContainer (btnOptions) {
   // Container element
@@ -6,14 +7,14 @@ function floatContainer (btnOptions) {
   container.id = 'ln-main-container'
 
   // Control button element
-  floatBtn(container,
-    {
-      ...btnOptions,
-      hidable: false,
-      hidden: false,
-      openIcon: 'gg-close',
-      onClick: toggleButtons
-    })
+  floatBtn(container, {
+    ...btnOptions,
+    hidable: false,
+    hidden: false,
+    openIcon: 'gg-close',
+    onClick: toggleButtons,
+    onClose: closeAllModalWindows
+  })
 
   // Logic
   function toggleButtons (state) {
@@ -37,6 +38,7 @@ function floatBtn (parent, options) {
     icon = 'gg-math-plus',
     openIcon,
     closeIcon,
+    modal,
     onClick = function () { },
     onOpen = function () { },
     onClose = function () { }
@@ -49,6 +51,16 @@ function floatBtn (parent, options) {
     container.setAttribute('hidden', true)
   }
   parent.appendChild(container)
+
+  // Modal element
+  if (modal) {
+    container.appendChild(modal)
+  }
+
+  function handleModalShow () {
+    closeAllModalWindows()
+    modal.removeAttribute('hidden')
+  }
 
   // Button element
   const button = document.createElement('button')
@@ -70,6 +82,9 @@ function floatBtn (parent, options) {
   function handleClick () {
     open = !open
     onClick(open)
+    if (modal) {
+      handleModalShow()
+    }
     if (open) {
       iconElement.className = closeIcon ?? icon
       onOpen()
@@ -84,13 +99,26 @@ function floatBtn (parent, options) {
 }
 
 function floatModal (id) {
+  const modal = document.createElement('div')
+  modal.id = id
+  modal.className = MODAL_CLASS
 
+  return modal
 }
 
-export function main (id) {
-  // Create content
-  const mainContainer = floatContainer()
-  floatBtn(mainContainer, { icon: 'gg-browser' })
-  floatBtn(mainContainer, { icon: 'gg-link' })
-  document.body.appendChild(mainContainer)
+function closeAllModalWindows () {
+  Array.from(document.getElementsByClassName(MODAL_CLASS))
+    .forEach((modal) => modal.setAttribute('hidden', true))
 }
+
+// CODE
+const mainContainer = floatContainer()
+const chatModal = floatModal('chat-modal')
+
+chatModal.innerHTML = `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iIyrLRixMs8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+`
+
+floatBtn(mainContainer, { icon: 'gg-browser', modal: chatModal })
+floatBtn(mainContainer, { icon: 'gg-link' })
+document.body.appendChild(mainContainer)
