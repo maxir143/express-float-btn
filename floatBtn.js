@@ -83,10 +83,14 @@ function floatBtn (parent, options) {
   return button
 }
 
-// Create content
-const mainContainer = floatContainer()
+function floatModal (id) {
 
-floatBtn(mainContainer, { icon: 'gg-browser' })
-floatBtn(mainContainer, { icon: 'gg-link' })
+}
 
-document.body.appendChild(mainContainer)
+export function main (id) {
+  // Create content
+  const mainContainer = floatContainer()
+  floatBtn(mainContainer, { icon: 'gg-browser' })
+  floatBtn(mainContainer, { icon: 'gg-link' })
+  document.body.appendChild(mainContainer)
+}

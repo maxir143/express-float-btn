@@ -1,0 +1,13 @@
+@import './float-btn.css';
+@import './icons.css';
+
+#ln-main-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  bottom: 20px;
+  right: 20px;
+  min-width: 75px;
+  min-height: 75px;
+}

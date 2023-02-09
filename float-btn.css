@@ -1,22 +1,11 @@
-#ln-main-container {
-  position: absolute;
+.float-btn {
   display: flex;
-  flex-direction: column-reverse;
-  gap: 10px;
-  bottom: 20px;
-  right: 20px;
-  min-width: 75px;
-  min-height: 75px;
-}
-
-.float-btn {  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    animation: 0.25s fade-in forwards;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  animation: 0.25s fade-in forwards;
 }
 
 .ln-btn-primary {
